@@ -1,0 +1,130 @@
+version: '3.2'
+services:
+  frontend:
+    build: ./frontend
+    image: ${REGISTRY_PATH}/frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - sstorage
+    volumes:
+      - images:/images
+    env_file:
+      - .env
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nc.role == front
+      update_config:
+        parallelism: 1
+
+  backend:
+    build: ./backend
+    image: ${REGISTRY_PATH}/backend:latest
+    depends_on:
+      - db
+      - cache
+    volumes:
+      - images:/images
+    environment:
+      - "VERSION=${GIT_HEAD_ID}"
+    env_file:
+      - .env
+    deploy:
+      placement:
+        constraints:
+          - node.labels.nc.role == main
+      update_config:
+        parallelism: 1
+        delay: 2s
+        monitor: 2s
+
+  daemon:
+    build: ./backend
+    image: ${REGISTRY_PATH}/backend:latest
+    depends_on:
+      - db
+      - cache
+    command: [ bash, /src/console/daemon.sh ]
+    volumes:
+      - images:/images
+    env_file:
+      - .env
+    deploy:
+      placement:
+        constraints:
+          - node.labels.nc.role == main
+
+  sstorage:
+    build: ./storage
+    image: ${REGISTRY_PATH}/storage:latest
+    ports:
+#      - "81:81"
+      - target: 81
+        published: 359
+        protocol: tcp
+        mode: host
+    environment:
+      - "DISCOVER=tasks.sstorage"
+    env_file:
+      - .env
+    volumes:
+      - "/var/storage:/storage"
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.nc.role == storage
+      update_config:
+        parallelism: 1
+        delay: 5s
+        monitor: 5s
+      restart_policy:
+        condition: on-failure
+
+  torgate:
+    build: ./torgate
+    image: ${REGISTRY_PATH}/torgate:latest
+    env_file:
+      - .env
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nc.role == front
+      update_config:
+        parallelism: 1
+        delay: 2s
+        monitor: 2s
+
+  db:
+    image: postgres:9
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    deploy:
+      placement:
+        constraints:
+          - node.labels.nc.role == main
+
+  cache:
+    image: redis
+    env_file:
+      - .env
+    deploy:
+      placement:
+          constraints:
+            - node.labels.nc.role == main
+    
+
+volumes:
+  db_data:
+    driver: local
+
+  images:
+    driver: local

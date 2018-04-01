@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
+<metaconfiguration>
+    <sources>
+        <source name="main" default="true"/>
+    </sources>
+</metaconfiguration>

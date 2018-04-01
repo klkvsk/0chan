@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
+<metaconfiguration>
+    <classes>
+
+        <class name="User">
+            <properties>
+                <identifier />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="login" type="String" size="255" required="true" />
+                <property name="password" type="String" size="64" required="true" />
+                <property name="role" type="UserRole" relation="OneToOne" fetch="lazy" required="true" />
+
+                <!-- settings -->
+                <property name="showNsfw" type="Boolean" required="true" default="false" />
+                <property name="treeView" type="Boolean" required="true" default="false" />
+                <property name="viewDeleted" type="Boolean" required="true" default="false" />
+
+                <property name="favouriteBoards" type="FavouriteBoard" relation="OneToMany" />
+                <property name="posts" type="Post" relation="OneToMany" />
+                <property name="bans" type="Ban" relation="OneToMany" />
+                <property name="identities" type="UserIdentity" relation="OneToMany" />
+                <property name="watchedThreads" type="Thread" relation="ManyToMany" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="UserRole">
+            <properties>
+                <identifier />
+            </properties>
+            <pattern name="EnumClass" />
+        </class>
+
+        <class name="Ban">
+            <properties>
+                <identifier />
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="ipHash" type="String" size="64" required="false" />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="bannedBy" type="User" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="bannedAt" type="Timestamp" required="true" />
+                <property name="bannedTill" type="Timestamp" required="true" />
+                <property name="unbannedBy" type="User" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="unbannedAt" type="Timestamp" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="post" type="Post" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="reason" type="String" required="true" />
+                <property name="appeal" type="String" required="false" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="UserIdentity">
+            <properties>
+                <identifier/>
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="address" type="String" size="32" required="true" />
+                <property name="name" type="String" size="32" required="true" />
+                <property name="deleted" type="Boolean" required="true" default="false" />
+                <property name="dialogs" type="Dialog" relation="OneToMany" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="FavouriteBoard">
+            <properties>
+                <identifier />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="BoardModerator">
+            <properties>
+                <identifier />
+                <property name="createdAt" type="Timestamp" required="true" />
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="initiator" type="User" relation="OneToOne" fetch="lazy" required="true" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="Board">
+            <properties>
+                <identifier />
+                <property name="dir" type="String" size="16" required="true" />
+                <property name="name" type="String" size="255" required="true" />
+                <property name="description" type="String" required="false" />
+                <property name="hidden" type="Boolean" required="true" default="false" />
+                <property name="nsfw" type="Boolean" required="true" default="false" />
+                <property name="blockRu" type="Boolean" required="true" default="false" />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="owner" type="User" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="deleted" type="Boolean" required="true" default="false" />
+                <property name="deletedAt" type="Timestamp" required="false" />
+                <property name="popularity" type="Integer" required="false" default="0" />
+                <property name="bumpLimit" type="Integer" required="true" default="500" />
+                <property name="threadLimit" type="Integer" required="true" default="100" />
+
+                <property name="favouritedBy" type="FavouriteBoard" relation="OneToMany" />
+                <property name="moderators" type="BoardModerator" relation="OneToMany" />
+                <property name="threads" type="Thread" relation="OneToMany" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="Thread">
+            <properties>
+                <identifier />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="updateDate" type="Timestamp" required="true" />
+                <property name="purgedAt" type="Timestamp" required="false" />
+                <property name="deleted" type="Boolean" required="true" default="false" />
+                <property name="deletedAt" type="Timestamp" required="false" />
+                <property name="sticky" type="Boolean" default="false" required="true" />
+                <property name="locked" type="Boolean" default="false" required="true" />
+                <property name="bumpLimitReached" type="Boolean" default="false" required="true" />
+                <property name="popularity" type="Integer" required="false" default="0" />
+
+                <property name="posts" type="Post" relation="OneToMany" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="Post">
+            <properties>
+                <identifier />
+                <property name="thread" type="Thread" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="parent" type="Post" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="ipHash" type="String" size="64" required="false" />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="deleted" type="Boolean" required="true" default="false" />
+                <property name="message" type="String" size="9001" required="false" />
+                <property name="approved" type="Boolean" required="true" default="false" />
+                <property name="banned" type="Boolean" required="true" default="false" />
+
+                <property name="reports" type="PostReport" relation="OneToMany" />
+                <property name="replies" type="Post" relation="OneToMany" />
+                <property name="attachments" type="Attachment" relation="OneToMany" />
+                <property name="referencedBys" type="PostReference" relation="OneToMany" />
+                <property name="referencesTos" type="PostReference" relation="OneToMany" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="PostReference">
+            <properties>
+                <identifier />
+                <property name="referencedBy" type="Post" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="referencesTo" type="Post" relation="OneToOne" fetch="lazy" required="true" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="Attachment">
+            <properties>
+                <identifier />
+                <property name="createDate" type="Timestamp" required="true" />
+                <property name="post" type="Post" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="publishToken" type="String" size="32" required="true" />
+                <property name="published" type="Boolean" required="true" default="false" />
+                <property name="deleted" type="Boolean" required="true" default="false" />
+                <property name="deletedAt" type="Timestamp" required="false" />
+                <property name="nsfw" type="Boolean" required="false" default="false" />
+                <property name="embed" type="AttachmentEmbed" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="images" type="AttachmentImage" relation="OneToMany" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="AttachmentImageRole">
+            <properties>
+                <identifier />
+            </properties>
+            <pattern name="EnumClass"/>
+        </class>
+
+        <class name="AttachmentImage">
+            <properties>
+                <identifier />
+                <property name="role" type="AttachmentImageRole" relation="OneToOne" fetch="lazy" />
+                <property name="attachment" type="Attachment" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="server" type="String" size="64" required="false" />
+                <property name="filename" type="String" size="64" required="true" />
+                <property name="fileSize" type="Integer" required="true" />
+                <property name="width" type="Integer" required="true" />
+                <property name="height" type="Integer" required="true" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="StorageTrash">
+            <properties>
+                <identifier />
+                <property name="server" type="String" size="64" required="true" />
+                <property name="filename" type="String" size="64" required="true" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="AttachmentEmbedService">
+            <properties>
+                <identifier/>
+            </properties>
+            <pattern name="EnumClass"/>
+        </class>
+
+        <class name="AttachmentEmbed">
+            <properties>
+                <identifier />
+                <property name="service" type="AttachmentEmbedService" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="embedId" type="String" size="255" required="true" />
+                <property name="title" size="255" type="String" required="false" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="PostReport">
+            <properties>
+                <identifier />
+                <property name="post" type="Post" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="date" type="Timestamp" required="true" />
+                <property name="reason" type="String" size="1000" required="true" />
+                <property name="reportedBy" type="User" relation="OneToOne" fetch="lazy" required="false" />
+                <property name="reportedByIpHash" type="String" size="64" required="false" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="UserSession">
+            <properties>
+                <property name="sessionId" type="String" required="true" />
+                <property name="userId" type="BigInteger" required="false" />
+                <property name="ipAddress" type="String" required="false" />
+                <property name="userAgent" type="String" required="false" />
+            </properties>
+            <pattern name="ValueObject"/>
+        </class>
+        
+        <class name="Dialog">
+            <properties>
+                <identifier />
+                <property name="as" type="UserIdentity" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="with" type="UserIdentity" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="createdAt" type="Timestamp" required="true" />
+                <property name="updatedAt" type="Timestamp" required="true" />
+
+                <property name="messages" type="DialogMessage" relation="ManyToMany" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+        
+        <class name="DialogMessage">
+            <properties>
+                <identifier />
+                <property name="from" type="UserIdentity" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="to" type="UserIdentity" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="date" type="Timestamp" required="true" />
+                <property name="text" type="String" size="2000" required="true" />
+                <property name="read" type="Boolean" required="true" default="false" />
+
+                <property name="dialogs" type="Dialog" relation="ManyToMany" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="BoardStats" type="abstract">
+            <properties>
+                <identifier />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="threadsActive" type="Integer" default="0" />
+                <property name="threadsNew" type="Integer" default="0" />
+                <property name="posts" type="Integer" default="0" />
+                <property name="uniquePosters" type="Integer" default="0" />
+            </properties>
+            <pattern name="AbstractClass"/>
+        </class>
+
+        <class name="BoardStatsHourly" extends="BoardStats">
+            <properties>
+                <identifier />
+                <property name="hour" type="Timestamp" required="true" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="BoardStatsDaily" extends="BoardStats">
+            <properties>
+                <identifier />
+                <property name="date" type="Date" required="true" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+    </classes>
+</metaconfiguration>

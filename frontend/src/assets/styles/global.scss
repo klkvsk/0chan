@@ -1,0 +1,300 @@
+@import "_vars";
+
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+//@import "~bootstrap/scss/bootstrap.scss";
+
+// FONTS:
+// - fontawesome
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+// - linecons
+@import "~assets/fonts/linecons/linecons.css";
+// - opensans condensed
+$FontPathOpenSansCondensed: "~npm-font-open-sans-condensed/fonts";
+@import '~npm-font-open-sans-condensed/open-sans-condensed';
+
+
+// COLORS:
+.color-white 		{ color: $color-white;    }
+.color-white-dk 	{ color: $color-white-dk; }
+.color-grey-lt 		{ color: $color-grey-lt;  }
+.color-grey 		{ color: $color-grey;     }
+.color-grey-dk 		{ color: $color-grey-dk;  }
+.color-black 		{ color: $color-black;    }
+.color-black-dk 	{ color: $color-black-dk; }
+.color-green-dk 	{ color: $color-green-dk; }
+.color-green 		{ color: $color-green;    }
+.color-green-lt 	{ color: $color-green-lt; }
+.color-green-bg 	{ color: $color-green-bg; }
+.color-blue 		{ color: $color-blue;     }
+.color-blue-dk 		{ color: $color-blue-dk;  }
+.color-red 		    { color: $color-red;      }
+.color-gold 		{ color: $color-gold;     }
+
+// ANIMATIONS:
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  // transition: all .3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+
+.form-control-feedback {
+  pointer-events: auto;
+}
+
+.blurred {
+  filter: blur(1px) brightness(90%);
+}
+
+html {
+  overflow-y: scroll;
+  body {
+    background-color: $color-white-dk;
+    font-family: "Trebuchet MS", sans-serif;
+    margin: 0;
+    padding: 0;
+    position:relative;
+  }
+
+}
+
+div {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+ul {
+  padding-left: 15px;
+}
+
+::selection {
+  background: $color-green-lt;
+  color:      $color-white;
+}
+
+.btn {
+  line-height: 20px;
+}
+
+.btn:focus, .btn:active, .btn:focus:active {
+  outline: none;
+}
+
+.empty-page {
+  text-align: center;
+  color: $color-grey;
+  text-shadow: -1px -1px 0 $color-white;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.separator {
+  margin: 20px 10px;
+  border-bottom: 1px solid lighten($color-white-dk, 5%);
+  border-top:    1px solid darken($color-white-dk, 25%);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.hand {
+  cursor: pointer;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+.has-feedback .form-control {
+  padding-right: 30px;
+}
+
+a, span.a, a > *, span.a > * {
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: color 0.2s linear !important;
+}
+
+a, span.a {
+  color: $color-green-dk;
+}
+
+a:hover, span.a:hover {
+  color: $color-green;
+}
+
+*:focus {
+  outline-color: $color-green;
+}
+
+.bg-title {
+  font-weight: bold;
+  color: #666;
+}
+
+
+.vspace {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  & + & {
+    margin-top: auto;
+  }
+}
+.vspace2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  & + & {
+    margin-top: auto;
+  }
+}
+
+.fa {
+  line-height: inherit;
+}
+
+.block {
+  display:  inline-block;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid $color-grey-lt;
+  border-radius: 2px;
+  background: $color-white;
+  box-shadow: 0 1px 4px $color-grey-lt;
+  white-space: normal;
+}
+
+blockquote, .quote {
+  display: inline-block;
+  border: 0;
+  padding: 0;
+  color: #6f9c6f;
+  font-style: italic;
+  font-size: inherit;
+  margin: 0;
+}
+
+mark, .spoiler {
+    color: $color-grey-lt;
+    background: $color-grey-lt;
+    padding: 2px;
+    transition: color .2s, background .2s;
+
+    &:hover {
+      color: inherit;
+      background: rgba($color-grey-lt, 0.25);
+    }
+}
+
+code {
+  white-space: normal;
+  background: none;
+}
+
+.text-deleted {
+  text-decoration: line-through;
+}
+
+.embed {
+  @extend .embed-responsive;
+  &[aspect="16:9"] {
+    @extend .embed-responsive-16by9;
+  }
+  &[aspect="4:3"] {
+    @extend .embed-responsive-4by3;
+  }
+  &[aspect="1:1"] {
+    padding-bottom: 100%;
+    max-width: 250px;
+  }
+  > iframe {
+    @extend .embed-responsive-item;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 75vw;
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    width: 450px;
+  }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    width: 600px;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: 960px;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
+address {
+  display: inline;
+  cursor: pointer;
+}
+address, .im-address {
+  white-space: nowrap;
+  font-family: $font-family-monospace;
+  font-size: inherit;
+  color: $color-green-dk !important;
+  border: 1px solid $color-green-dk;
+  border-radius: 2px;
+  padding: 0 4px;
+
+  &.im-grey {
+    color: $color-grey !important;
+    border-color: $color-grey !important;
+  }
+
+  &:before {
+    @extend .fa;
+    @extend .fa-envelope-o;
+    padding-right: 4px;
+  }
+
+}
+a.im-address:hover:before, address:hover:before  {
+  @extend .fa-envelope;
+}
+
+/// bs4 migration
+/*
+.hidden-xs {
+  @extend .hidden-xs-down;
+}
+.visible-xs {
+  @extend .hidden-sm-up;
+}
+.visible-xs-inline-block {
+  @extend .hidden-sm-up;
+}
+.btn-default {
+  @extend .btn-secondary;
+}
+.btn-xs {
+  @extend .btn-sm;
+}
+.panel { @extend .card }
+.panel-heading { @extend .card-header }
+.panel-footer { @extend .card-footer }
+.panel-body { @extend .card-block }
+
+.control-label { @extend .form-control-label }
+.form-control { @extend .form-control-sm }
+.btn { @extend .btn-sm }
+*/
+

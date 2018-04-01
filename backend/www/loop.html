@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        body {
+            background: #2C333D;
+        }
+        #zero {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -120px;
+            margin-top: -180px;
+        }
+        .row {
+            clear: both;
+        }
+        i, b, s {
+            position: relative;;
+            display: inline-block;
+            float: left;
+            height: 20px;
+            width: 20px;
+
+        }
+        b, i {
+            border-radius: 4px;
+
+            transform: perspective(1000px) translateZ(400px);
+            will-change: transform, box-shadow;
+            filter: blur(1px);
+        }
+        b {
+            background: radial-gradient(#3ce29d 15%, #16b085);
+        }
+        b.idle {
+            background: radial-gradient(#3CCD9D 15%, #16a085);
+            /*box-shadow: 0 0 20px #3CCD9D;*/
+        }
+        i {
+            background: radial-gradient(#4a9174 15%, #3d765e);
+            /*box-shadow: 0 0 20px #4A8474;*/
+        }
+        i.idle {
+            background: radial-gradient(#4A8474 15%, #3D6B5E);
+            /*box-shadow: 0 0 20px #4A8474;*/
+        }
+
+        .idle {
+            /*transition: transform .3s ease-out, filter .3s;*/
+            transition: transform .3s cubic-bezier(.56,.09,.93,.3), background .3s cubic-bezier(.56,.09,.93,.3), filter .3s cubic-bezier(.56,.09,.93,.3);
+            transform: perspective(1000px) translateZ(0px);
+            /*box-shadow: none;*/
+            filter: blur(0px);
+        }
+    </style>
+</head>
+<body>
+<audio id="loop" src="cann.mp3"></audio>
+<div id="zero">
+<div class="row">
+
+    <div class="row">
+        <s></s> <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s> <s></s>
+    </div>
+    <div class="row">
+        <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <b></b> <b></b> <i></i> <i></i><i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s>
+    </div>
+    <div class="row">
+        <s></s> <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s> <s></s>
+    </div>
+</div>
+</div>
+
+<script>
+    window.onload = function () {
+
+        var w = 12;
+        var h = 18;
+        var z = 1;
+
+        var els = document.getElementsByTagName('b');
+        for (var i in els) if (els.hasOwnProperty(i)) {
+            els[i].className = 'idle';
+        }
+        var els = document.getElementsByTagName('i');
+        for (var i in els) if (els.hasOwnProperty(i)) {
+            els[i].className = 'idle';
+        }
+
+        var p = [];
+        var els = document.getElementsByClassName('row');
+        for (var i in els) if (els.hasOwnProperty(i)) {
+            p.push(els[i].children);
+        }
+
+        function jump(x, y) {
+            var px = p[y][x];
+            px.className = '';
+            px.style.zIndex = z++;
+            if (z > 10e5) z = 0;
+            px.parentElement.style.zIndex = z++;
+            setTimeout(
+                function () { px.className = 'idle' }, 50
+            )
+        }
+//
+//        setInterval(
+//            function () {
+//                jump();jump();jump();jump();jump();jump();jump();
+//            },
+//            50
+//        );
+
+
+        var ctx = new AudioContext();
+        var audio = document.getElementById('loop');
+        audio.play();
+        var audioSrc = ctx.createMediaElementSource(audio);
+        var analyser = ctx.createAnalyser();
+        // we have to connect the MediaElementSource with the analyser
+        audioSrc.connect(analyser);
+        audioSrc.connect(ctx.destination);
+        // we could configure the analyser: e.g. analyser.fftSize (for further infos read the spec)
+
+        // frequencyBinCount tells you how many values you'll receive from the analyser
+        var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+        // we're ready to receive some data!
+        // loop
+        function renderFrame() {
+            requestAnimationFrame(renderFrame);
+            // update data in frequencyData
+            analyser.getByteFrequencyData(frequencyData);
+            // render frame based on values in frequencyData
+            var len = frequencyData.length;
+            for (var i in frequencyData) {
+                if (frequencyData[i] > 127) {
+                    var y = h - Math.floor(h * i/len);
+                    var x = Math.floor(Math.random() * w);
+                    jump(x, y);
+                }
+            }
+        }
+        audio.play();
+        renderFrame();
+    }
+</script>
+
+</body>
+</html>

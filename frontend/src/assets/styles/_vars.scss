@@ -1,0 +1,43 @@
+$sidebar-width: 250px;
+
+$color-white:     #fefefe;
+$color-white-dk:  #eeeeee;
+
+$color-grey-lt:   #cccccc;
+$color-grey:      #999999;
+$color-grey-dk:   #666666;
+
+$color-black:     #333333;
+$color-black-dk:  #000000;
+
+$color-green-dk:  #16a085;
+$color-green:     #1abc9c;
+$color-green-lt:  #3CCD9D;
+
+$color-green-bg:  #ecfff8;
+
+$color-blue:      #3f424f;
+$color-blue-dk:   #2C333D;
+
+$color-red:       #CD5C5C;
+$color-gold:      #dab750;
+
+// BOOTSTRAP SETTINGS:
+$font-family-monospace : Consolas, Monaco, "Courier New", monospace;
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$brand-info:            #1abc9c;
+$brand-primary:         #16a085;
+$btn-primary-border:    #16a085;
+$input-border-focus:    #1abc9c;
+$grid-columns:          24;
+
+$border-radius-base:        2px !default;
+$border-radius-large:       4px !default;
+$border-radius-small:       2px !default;
+
+$code-color:               $color-blue !default;
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
+//@import "~bootstrap/scss/_variables";
+//@import "~bootstrap/scss/_mixins";
+

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
+<metaconfiguration>
+    <include file="sources.xml" generate="true" />
+    <include file="classes.xml" generate="true" />
+    <include file="moderator_log.xml" generate="true" />
+</metaconfiguration>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
+<metaconfiguration>
+    <classes>
+
+        <class name="ModeratorLogEventType">
+            <properties>
+                <identifier />
+            </properties>
+            <pattern name="EnumClass"/>
+        </class>
+        
+        <class name="ModeratorLog">
+            <properties>
+                <identifier />
+                <property name="board" type="Board" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="eventDate" type="Timestamp" required="true" />
+                <property name="eventUser" type="User" relation="OneToOne" fetch="lazy" required="true" />
+                <property name="eventType" type="ModeratorLogEventType" relation="OneToOne" fetch="lazy" required="true" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+        <class name="ModeratorLog_Message" extends="ModeratorLog" table="moderator_log">
+            <properties>
+                <property name="message" type="String" size="1000" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="ModeratorLog_Ban" extends="ModeratorLog" table="moderator_log">
+            <properties>
+                <property name="ban" type="Ban" relation="OneToOne" fetch="lazy" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="ModeratorLog_Post" extends="ModeratorLog" table="moderator_log">
+            <properties>
+                <property name="threadId" type="Integer" />
+                <property name="threadTitle" type="String" size="255" />
+                <property name="postId" type="Integer" fetch="lazy" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="ModeratorLog_Attachment" extends="ModeratorLog_Post" table="moderator_log">
+            <properties>
+                <property name="threadId" type="Integer" />
+                <property name="threadTitle" type="String" size="255" />
+                <property name="postId" type="Integer" fetch="lazy" />
+                <property name="attachmentId" type="Integer" fetch="lazy" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="ModeratorLog_User" extends="ModeratorLog" table="moderator_log">
+            <properties>
+                <property name="user" type="User" relation="OneToOne" fetch="lazy" />
+            </properties>
+            <pattern name="StraightMapping"/>
+        </class>
+
+        <class name="ModeratorLog_Property" extends="ModeratorLog" table="moderator_log">
+            <properties>
+                <property name="propertyName" type="String" size="255" />
+                <property name="oldValue" type="String" size="255" />
+                <property name="newValue" type="String" size="255" />
+            </properties>
+            <pattern name="StraightMapping" />
+        </class>
+
+    </classes>
+</metaconfiguration>

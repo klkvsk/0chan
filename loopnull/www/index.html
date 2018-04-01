@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        body {
+            background: #2C333D;
+        }
+        #zero {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -120px;
+            margin-top: -180px;
+        }
+        .row {
+            clear: both;
+        }
+        i, b, s {
+            position: relative;;
+            display: inline-block;
+            float: left;
+            height: 20px;
+            width: 20px;
+
+        }
+        b, i {
+            border-radius: 4px;
+
+            backface-visibility: hidden;
+            transform: perspective(1000px) translateZ(270px);
+            will-change: transform, box-shadow, filter;
+            filter: blur(1px);
+        }
+        b {
+            background: radial-gradient(#3cd29d 15%, #16a585);
+        }
+        b.idle {
+            background: radial-gradient(#3CCD9D 15%, #16a085);
+            /*box-shadow: 0 0 20px #3CCD9D;*/
+        }
+        i {
+            background: radial-gradient(#4a8974 15%, #3d6f5e);
+            /*box-shadow: 0 0 20px #4A8474;*/
+        }
+        i.idle {
+            background: radial-gradient(#4A8474 15%, #3D6B5E);
+            /*box-shadow: 0 0 20px #4A8474;*/
+        }
+
+        .idle {
+            /*transition: transform .3s ease-out, filter .3s;*/
+            transition: transform .45s cubic-bezier(.6,0,.9,.6), background .45s cubic-bezier(.6,0,.9,.6), filter .45s cubic-bezier(.6,0,.9,.6);
+            transform: perspective(1000px) translateZ(0px);
+            /*box-shadow: none;*/
+            filter: blur(0px);
+        }
+    </style>
+</head>
+<body>
+<!--<audio id="loop" src="100-1000.mp3"></audio>-->
+<audio id="loop" src="cann.mp3"></audio>
+<!--<audio id="loop" src="episode.wav"></audio>-->
+<canvas width="512px" height="100px"></canvas>
+<div id="zero">
+<div class="row">
+
+    <div class="row">
+        <s></s> <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s> <s></s>
+    </div>
+    <div class="row">
+        <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <i></i> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <b></b> <b></b> <i></i> <i></i><i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <b></b> <b></b> <b></b> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <i></i> <b></b> <b></b>
+    </div>
+    <div class="row">
+        <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s>
+    </div>
+    <div class="row">
+        <s></s> <s></s> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <b></b> <s></s> <s></s>
+    </div>
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

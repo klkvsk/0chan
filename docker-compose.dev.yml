@@ -1,0 +1,28 @@
+version: '3.2'
+services:
+  backend:
+    volumes:
+      - ./backend:/src
+
+  # disabled, run manually
+  daemon:
+    command: [ /bin/true ]
+
+  # disabled
+  torgate:
+    command: [ /bin/true ]
+
+  db:
+    ports:
+      - "15432:5432"
+
+  sstorage:
+    build: ./storage
+    ports:
+      - "228:228"
+#      - "53:53/udp"
+    environment:
+      - "DISCOVER=sstorage"
+    volumes:
+      - ./storage/dev-volume:/storage
+      - ./storage/src:/app/src
