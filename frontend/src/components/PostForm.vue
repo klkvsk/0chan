@@ -214,6 +214,9 @@
                                 case 'blockRu':
                                     this.$bus.emit(BusEvents.ALERT_ERROR, 'На этой доске нельзя постить из РФ') ;
                                     break;
+
+                                case 'gimme_image':
+                                    this.$bus.emit(BusEvents.ALERT_ERROR, 'Налепите пикчу...') ;
                             }
                         } else {
                             throw new Error(result);

@@ -8,6 +8,7 @@ $crontab = [
     'cleanBoards'           => 1,
     'countRatings'          => 60,
     'updateBoardStats'      => 1,
+    'CreateAdminUser'		=> 1
 ];
 
 $minutesNow = floor(time() / 60);
