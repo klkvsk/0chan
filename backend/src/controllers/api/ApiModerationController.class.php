@@ -564,7 +564,7 @@ class ApiModerationController extends ApiBaseController
         $return_list = array();
 
         if (is_array($posts) || is_object($posts)) {
-            foreach($posts as $post){
+            foreach ($posts as $post) {
                 $return_list[] = $post;
             }
         }
@@ -573,7 +573,8 @@ class ApiModerationController extends ApiBaseController
 
     }
 
-    public function delallAction(Post $post){
+    public function delallAction(Post $post)
+    {
         if (!$post->canBeModeratedBy($this->getUser())) {
             throw new ApiForbiddenException();
         }
@@ -581,7 +582,7 @@ class ApiModerationController extends ApiBaseController
         $db = DBPool::getByDao(Post::dao());
         try {
             $db->begin();
-            foreach($resp as $to_delete){
+            foreach ($resp as $to_delete) {
                $this->deletePost($to_delete); 
             }
             $db->commit();
@@ -590,7 +591,7 @@ class ApiModerationController extends ApiBaseController
             throw $e;
         }
         $exp_data = array();
-        foreach($resp as $to_out){
+        foreach ($resp as $to_out) {
             $exp_data[] = $to_out->export();
         }
         return ['ok' => true, 'result' => $exp_data, "ipHash" => $post->getIpHash()];
