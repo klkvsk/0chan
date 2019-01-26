@@ -44,7 +44,6 @@ const emojination = {
     '$im': '📧',
     '$404': '😢',
     '$home': '🏠',
-    '$loop': '➰',
 };
 const emojinate = (route) => {
     let path = route.path.replace(/^\//, '').split('/');
@@ -149,10 +148,6 @@ let routes = [
                 component: ModeratorBoardStats
             }
         ]
-    },{
-        path: '/$loop',
-        name: 'loop',
-        component: Loop,
     },{
         path: '/',
         alias: '/$home',
