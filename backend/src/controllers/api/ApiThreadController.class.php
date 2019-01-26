@@ -212,7 +212,7 @@ class ApiThreadController extends ApiBaseController
                 throw new ApiBadRequestException('no message and no files to post');
             }
 
-            if($parent == null && empty($imageIds)){
+            if ($parent == null && empty($imageIds)) {
                 return ["ok" => false, "reason" => "gimme_image"];
             }
 
