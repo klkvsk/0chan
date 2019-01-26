@@ -11,16 +11,6 @@ Promise.config({
 
 import Vue from 'vue'
 
-// = error catcher
-import Raven from 'raven-js';
-import RavenVue from 'raven-js/plugins/vue';
-if (process.env.NODE_ENV === "production" && process.env.SENTRY_FRONTEND) {
-    Raven
-        .config(process.env.SENTRY_FRONTEND)
-        .addPlugin(RavenVue, Vue)
-        .install();
-}
-
 import UI from './app/UI'
 if (typeof window !== 'undefined') {
     window.onerror = (e) => UI.bsod(e);
