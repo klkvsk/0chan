@@ -93,6 +93,7 @@
                     <span class="post-button" @click="deletePost" v-if="post.isDeleted === false" title="Удалить"><i class="fa fa-fw fa-times"></i></span>
                     <span class="post-button" v-if="post.isDeleted === null"><i class="fa fa-fw fa-spinner fa-spin"></i></span>
                     <span class="post-button" @click="restorePost" v-if="post.isDeleted === true" title="Восстановить"><i class="fa fa-fw fa-undo"></i></span>
+                    <span class="post-button" @click="delallPost" v-if="post.isDeleted === false" title="Делол"><i class="fa fa-fw fa-eraser"></i></span>
                     <span class="post-button" @click="toggleBanForm" v-if="!post.isUserBanned" :class="{ active: isBanFormShown }" title="Забанить автора"><i class="fa fa-fw fa-gavel"></i></span>
                     <div v-if="isBanFormShown" class="ban-popup panel panel-default block" slot="content">
                         <form class="form" @submit.prevent="submitBan">
@@ -230,6 +231,16 @@
                 Moderation.deletePost(this.post.id).then(response => {
                     if (response.data.ok) {
                         Object.assign(this.post, response.data.post);
+                    }
+                })
+            },
+            delallPost() {
+                const reason = prompt('Вы уверены? (Напишите: Да):');
+                if(!reason) return;
+                this.post.isDeleted = null;
+                Moderation.delallPost(this.post.id).then(response => {
+                    if (response.data.ok) {
+                        this.$bus.emit(BusEvents.ALERT_SUCCESS, 'Вычистил все посты :3');
                     }
                 })
             },

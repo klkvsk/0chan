@@ -555,6 +555,47 @@ class ApiModerationController extends ApiBaseController
         $modlog->setPost($post)->add();
     }
 
+    protected function getAllPostsByHash($iphash){
+        $posts = Criteria::create(Post::dao()) -> add(Expression::eq('ipHash', $iphash))
+            ->addOrder(OrderBy::create('id')
+            ->desc())
+            ->getList();
+
+        $return_list = array();
+
+        if (is_array($posts) || is_object($posts)) {
+            foreach($posts as $post){
+                $return_list[] = $post;
+            }
+        }
+
+        return $return_list;
+
+    }
+
+    public function delallAction(Post $post){
+        if (!$post->canBeModeratedBy($this->getUser())) {
+            throw new ApiForbiddenException();
+        }
+        $resp = $this->getAllPostsByHash($post->getIpHash());
+        $db = DBPool::getByDao(Post::dao());
+        try {
+            $db->begin();
+            foreach($resp as $to_delete){
+               $this->deletePost($to_delete); 
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
+        $exp_data = array();
+        foreach($resp as $to_out){
+            $exp_data[] = $to_out->export();
+        }
+        return ['ok' => true, 'result' => $exp_data, "ipHash" => $post->getIpHash()];
+    }
+
     /**
      * @Auth
      *
