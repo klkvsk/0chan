@@ -70,12 +70,14 @@
                             <a :data-post="replyPostId">&gt;&gt;{{replyPostId}}</a><span>, </span>
                         </span>
                 </div>
+                <!--
                 <div v-if="post.referencedByIds.length" class="post-referenced-by">
                     Упоминания:
                     <span v-for="refPostId in post.referencedByIds">
                             <a :data-post="refPostId">&gt;&gt;{{refPostId}}</a><span>, </span>
                         </span>
                 </div>
+                -->
             </div>
 
             <div class="post-footer" v-if="!readonly">
