@@ -4,17 +4,6 @@ require '../config.inc.php';
 $tInit = microtime(true);
 
 $errorReporting = null;
-if (PRODUCTION) {
-    $sentryEndpoint = getenv('SENTRY_BACKEND');
-    if ($sentryEndpoint) {
-        $errorReporting = new Raven_Client($sentryEndpoint);
-        try {
-            $errorReporting->install();
-        } catch (Raven_Exception $e) {
-            error_log($e->getMessage());
-        }
-    }
-}
 
 try {
 	$request = HttpRequest::createFromGlobals();

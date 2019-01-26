@@ -68,7 +68,7 @@ services:
         protocol: tcp
         mode: host
     environment:
-      - "DISCOVER=tasks.sstorage"
+      - "DISCOVER=sstorage"
     env_file:
       - .env
     volumes:

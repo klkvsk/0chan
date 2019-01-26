@@ -1,26 +1,8 @@
 import $ from 'jquery'
 import BusEvents from './BusEvents'
-import Raven from 'raven-js'
 
 export default {
     bsod(...messages) {
-        if (process.env.NODE_ENV === 'production') {
-            let [ sentryError, ...sentryBreadcrumbs ] = messages;
-            for (let sentryBreadcrumb of sentryBreadcrumbs) {
-                Raven.captureBreadcrumb({ message: sentryBreadcrumb });
-            }
-            const hiddenErrors = [ `Network Error`, `'tgt'` ];
-            let isReportingError = true;
-            for (let hiddenError of hiddenErrors) {
-                if (sentryError.toString().indexOf(hiddenError) !== -1) {
-                    isReportingError = false;
-                }
-            }
-            if (isReportingError) {
-                Raven.captureException(sentryError);
-            }
-        }
-
         let errorText = messages
             .map((e) => {
                 if (e.stack && typeof e.stack.toString === 'function')
