@@ -19,7 +19,6 @@
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "npm-font-open-sans-condensed": "^1.0.3",
-    "raven-js": "^3.13.1",
     "vue": "^2.2.6",
     "vue-animated-list": "^1.0.2",
     "vue-bus": "^0.3.0",
