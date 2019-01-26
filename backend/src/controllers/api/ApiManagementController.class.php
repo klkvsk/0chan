@@ -28,7 +28,7 @@ class ApiManagementController extends ApiBaseController
         $this->assertAccess($board);
 
         if (!$board) {
-            if($this->getUser()->getRole()->isGlobalAdmin() != true){
+            if ($this->getUser()->getRole()->isGlobalAdmin() != true) {
                 throw new ApiForbiddenException;
                 return false;
             }
