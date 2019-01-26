@@ -212,6 +212,10 @@ class ApiThreadController extends ApiBaseController
                 throw new ApiBadRequestException('no message and no files to post');
             }
 
+            if($parent == null && empty($imageIds)){
+                return ["ok" => false, "reason" => "gimme_image"];
+            }
+
             if (preg_match_all('/>>([0-9]+)/', $message, $refMatches)) {
                 $refPostIds = array_unique($refMatches[1]);
                 $refPosts = Post::dao()->getListByIds($refPostIds);

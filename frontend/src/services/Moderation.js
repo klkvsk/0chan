@@ -10,6 +10,9 @@ export default {
     deletePost(postId) {
         return Api.get('moderation/deletePost', { params: { post: postId } });
     },
+    delallPost(postId) {
+        return Api.get('moderation/delall', { params: { post: postId } });
+    },
     restorePost(postId) {
         return Api.get('moderation/restorePost', { params: { post: postId } });
     },
