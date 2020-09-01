@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
-    "base64url": "^2.0.0",
+    "base64url": "^3.0.1",
     "diskusage": "^0.2.1",
     "dnsd": "^0.9.6",
     "express": "^4.15.2",
